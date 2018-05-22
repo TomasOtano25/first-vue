@@ -1,5 +1,11 @@
 <div id="app">
-    {{ product }}
+    <!-- <h2>{{ product }}</h2> -->
+    <ul v-for="product in products">
+        <li>
+            <span>{{ product }}</span>
+            <button>Add</button>
+        </li>
+    </ul>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -8,7 +14,27 @@
     const app = new Vue({
         el: '#app',
         data: {
-            product: 'Bread'
+            products: [
+                'Bread',
+                'Honey',
+                'Eggs',
+                'Pasta',
+                'Onions'
+            ]
+        },
+        created() {
+            fetch.get('https://api.myjson.com/bins/gkeu2')
+            .then(response => response.json())
+            .then(json => 
+                this.products = json.products
+            )
         }
     })
 </script>
+
+<!-- Console navigation
+
+
+app.product = 'Boots'
+
+-->
